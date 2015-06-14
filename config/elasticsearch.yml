@@ -1,3 +1,5 @@
+cluster:
+  name: tango-shop-snapdeal
 path:
   logs: /data/log
   data: /data/data
