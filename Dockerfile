@@ -5,7 +5,7 @@
 #
 
 # Pull base image.
-FROM cloudesire/java:6
+FROM andimeo/java:6
 
 ENV ES_PKG_NAME elasticsearch-1.1.1
 
@@ -21,8 +21,11 @@ RUN \
 VOLUME ["/data"]
 
 # Mount elasticsearch.yml config
-ADD config/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
-
+COPY config/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
+COPY models /elasticsearch/
+COPY resources /elasticsearch/
+COPY tokenizer.properties /elasticsearch/
+COPY analysis-vietnamese /elasticsearch/plugins
 # Define working directory.
 WORKDIR /data
 
