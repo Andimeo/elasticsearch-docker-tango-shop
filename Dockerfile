@@ -22,16 +22,19 @@ VOLUME ["/data"]
 
 # Mount elasticsearch.yml config
 COPY config/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
-COPY models /elasticsearch/
-COPY resources /elasticsearch/
-COPY tokenizer.properties /elasticsearch/
-COPY analysis-vietnamese /elasticsearch/plugins
+COPY models /data/models/
+COPY resources /data/resources/
+COPY tokenizer.properties /data/
+COPY analysis-vietnamese.zip /
+
+RUN \
+  cd /elasticsearch && \
+  bin/plugin --install analysis-vietnamese --url file:/analysis-vietnamese.zip
 # Define working directory.
 WORKDIR /data
 
 # Define default command.
 CMD ["/elasticsearch/bin/elasticsearch"]
-
 # Expose ports.
 #   - 9200: HTTP
 #   - 9300: transport
