@@ -22,16 +22,16 @@ VOLUME ["/data"]
 
 # Mount elasticsearch.yml config
 COPY config/elasticsearch.yml /elasticsearch/config/elasticsearch.yml
-COPY models /data/models/
-COPY resources /data/resources/
-COPY tokenizer.properties /data/
-COPY analysis-vietnamese.zip /
+COPY models /run/models/
+COPY resources /run/resources/
+COPY tokenizer.properties /run/
+COPY analysis-vietnamese.zip /run/
 
 RUN \
   cd /elasticsearch && \
-  bin/plugin --install analysis-vietnamese --url file:/analysis-vietnamese.zip
+  bin/plugin --install analysis-vietnamese --url file:/run/analysis-vietnamese.zip
 # Define working directory.
-WORKDIR /data
+WORKDIR /run
 
 # Define default command.
 CMD ["/elasticsearch/bin/elasticsearch"]
