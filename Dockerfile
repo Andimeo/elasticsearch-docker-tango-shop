@@ -30,13 +30,16 @@ COPY analysis-vietnamese.zip /run/
 RUN \
   cd /elasticsearch && \
   bin/plugin --install analysis-vietnamese --url file:/run/analysis-vietnamese.zip
+
+COPY start.sh /run/
 # Define working directory.
 WORKDIR /run
 
 # Define default command.
-CMD ["/elasticsearch/bin/elasticsearch"]
+CMD ["/bin/bash", "start.sh"]
 # Expose ports.
 #   - 9200: HTTP
 #   - 9300: transport
 EXPOSE 9200
-EXPOSE 9300
+EXPOSE 9201
+EXPOSE 9202
